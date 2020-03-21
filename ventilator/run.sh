@@ -17,13 +17,13 @@ worker_3_pid="$!"
 python tasksink/sink.py &
 sink_pid="$!"
 
-sleep 1
-kill "$vent_pid"
+sleep 5
+kill $vent_pid
 
 sleep 1
-kill "$worker_1_pid"
-kill "$worker_2_pid"
-kill "$worker_3_pid"
+kill $worker_1_pid
+kill $worker_2_pid
+kill $worker_3_pid
 
 sleep 1
-kill "$sink_pid"
+kill $sink_pid

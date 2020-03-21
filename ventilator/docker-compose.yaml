@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  taskvent:
+    build: taskvent
+    command: ['python', 'ventilator.py']
+    environment:
+      BIND_URI: tcp://0.0.0.0:5557
+  taskwork:
+    build: taskwork
+    command: ['python', 'worker.py', 'worker']
+    environment:
+      SOURCE_URI: tcp://taskvent:5557
+      SINK_URI: tcp://tasksink:5558
+  tasksink:
+    build: tasksink
+    command: ['python', 'sink.py']
+    environment:
+      BIND_URI: tcp://0.0.0.0:5558

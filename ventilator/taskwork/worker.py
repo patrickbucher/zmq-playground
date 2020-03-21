@@ -11,12 +11,12 @@ name = sys.argv[1]
 context = zmq.Context()
 
 receiver = context.socket(zmq.PULL)
-source_port = os.getenv('SOURCE_PORT', '5557')
-receiver.connect(f'tcp://localhost:{source_port}')
+source_uri = os.getenv('SOURCE_URI')
+receiver.connect(source_uri)
 
 sender = context.socket(zmq.PUSH)
-sink_port = os.getenv('SINK_PORT', '5558')
-sender.connect(f'tcp://localhost:{sink_port}')
+sink_uri = os.getenv('SINK_URI')
+sender.connect(sink_uri)
 
 while True:
     task = receiver.recv().decode('utf-8')

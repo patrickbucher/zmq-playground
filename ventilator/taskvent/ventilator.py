@@ -6,12 +6,8 @@ import zmq
 context = zmq.Context()
 
 sender = context.socket(zmq.PUSH)
-bind_port = os.getenv('BIND_PORT', '5557')
-sender.bind(f'tcp://0.0.0.0:{bind_port}')
-
-sink = context.socket(zmq.PUSH)
-sink_port = os.getenv('SINK_PORT', '5558')
-sink.connect(f'tcp://localhost:{sink_port}')
+bind_uri = os.getenv('BIND_URI', 'tcp://0.0.0.0:5557')
+sender.bind(bind_uri)
 
 random.seed()
 while True:
